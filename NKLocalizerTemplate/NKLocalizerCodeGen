@@ -10,31 +10,30 @@ echo
 
 readonly DATE=`date +%d.%m.%Y`
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/Module"
-SUPPORT_FILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/Module/SupportFiles"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/Localizer"
 
 function generateTemplates () {
   echo "Please enter type name ~>"
   read typeName
 
-  cd $(cd $directory; pwd) && mkdir $moduleName && cd $moduleName
-  cp -R $SCRIPT_DIR/*.swift $PWD
+  cd $(cd $directory; pwd) && mkdir $typeName && cd $typeName
+  cp -R $SCRIPT_DIR/*.* $PWD
 
   for i in *.swift ; do
     mv $i `echo "$i"|awk -F'.' '{print "'$typeName'"$1"."$2}'`
-    sed -i '' 's/$TYPE_NAME/'$typeName'/g' *.swift
-    sed -i '' 's/$CREATE_DATE/'$DATE'/g' *.swift
-    sed -i '' 's/$USER/'$USER'/g' *.swift
-  done
-
-
-  for i in *.* ; do
-    mv $i `echo "$i"|awk -F'.' '{print "'$moduleName'."$2}'`
-    sed -i '' 's/$MODULE_NAME/'$moduleName'/g' *.*
+    sed -i '' 's/$TYPE_NAME/'$typeName'/g' *.*
     sed -i '' 's/$CREATE_DATE/'$DATE'/g' *.*
     sed -i '' 's/$USER/'$USER'/g' *.*
   done
-  
+
+
+  for i in *.strings ; do
+    mv $i `echo "$i"|awk -F'.' '{print "'$typeName'."$2}'`
+    sed -i '' 's/$TYPE_NAME/'$typeName'/g' *.*
+    sed -i '' 's/$CREATE_DATE/'$DATE'/g' *.*
+    sed -i '' 's/$USER/'$USER'/g' *.*
+  done
+
   echo "~Templates created~"
   askContinue
 }

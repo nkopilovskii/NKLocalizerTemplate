@@ -1,8 +1,8 @@
 /*
- 🐍NKSmartViper
- Generated with NKSmartViperCodeGen
+ NKLocalizerTemplate
+ Generated with NKLocalizerCodeGen
  
- $MODULE_NAME.strings
+ $TYPE_NAME.strings
  
  Created by $USER
  Copyright © $USER. All rights reserved.
