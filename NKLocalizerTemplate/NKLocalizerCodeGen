@@ -16,7 +16,9 @@ function generateTemplates () {
   echo "Please enter type name ~>"
   read typeName
 
-  cd $(cd $directory; pwd) && mkdir $typeName && cd $typeName
+  localizerName="${typeName}Localizer"
+
+  cd $(cd $directory; pwd) && mkdir $localizerName && cd $localizerName
   cp -R $SCRIPT_DIR/*.* $PWD
 
   for i in *.swift ; do
@@ -34,7 +36,11 @@ function generateTemplates () {
     sed -i '' 's/$USER/'$USER'/g' *.*
   done
 
+  echo
+  echo
   echo "~Templates created~"
+  echo
+  echo
   askContinue
 }
 
@@ -59,7 +65,10 @@ function askContinue () {
         generateTemplates
         ;;
     *)
-    echo "🐍Thank You & Good Luck!"  ;;
+
+    echo
+    echo
+    echo "Thank You & Good Luck!"  ;;
 esac
 }
 
