@@ -29,20 +29,28 @@
 
 import Foundation
 
-//MARK: - NKSVLocalizer base generic class
-class NKSVLocalizer<Type> {
+let kNKLocalizerAppLanguage = "com.NKLocalizer.kLocalizerAppLanguage"
+let kNKLocalizerLanguageNotification = "com.NKLocalizer.kNKLocalizerLanguageNotification"
+
+//MARK: - NKLocalizer base generic class
+class NKLocalizer<Type> {
+
   
   enum LanguageKey: String {
     case Base
     //TODO: Add supported languages identifiers
+    
+    init(_ rawValue: String) {
+      self = LanguageKey(rawValue: rawValue) ?? .Base
+    }
   }
   
-  let language: LanguageKey
-  let tableName: String
-  let bundle: Bundle
+  private(set) var language: LanguageKey
+  private(set) var tableName: String
+  private(set) var bundle: Bundle
   
-  init(language: LanguageKey? = .Base) {
-    self.language = language ?? .Base
+  init(language: LanguageKey? = nil) {
+    self.language = language ?? NKLocalizer.LanguageKey.appLanguage
     self.tableName = String(describing: Type.self)
     
     if let path = Bundle.main.path(forResource: (language ?? .Base).rawValue, ofType: "lproj"), let bundle = Bundle(path: path) {
@@ -55,5 +63,23 @@ class NKSVLocalizer<Type> {
   func localizedString(for key: String) -> String {
     return bundle.localizedString(forKey: key, value: key, table: tableName)
   }
+  
+  final func changeAppLanguage(_ languageKey: LanguageKey) {
+    UserDefaults.standard.set(languageKey.rawValue, forKey: kNKLocalizerAppLanguage)
+    NotificationCenter.default.post(name: NSNotification.Name(kNKLocalizerLanguageNotification), object: nil)
+  }
+  
 }
 //MARK: -
+
+
+extension NKLocalizer.LanguageKey {
+  
+  static var appLanguage: NKLocalizer.LanguageKey {
+    guard let currentLocale = Locale.preferredLanguages.first else {
+      return .Base
+    }
+    return NKLocalizer.LanguageKey(currentLocale)
+  }
+  
+}
