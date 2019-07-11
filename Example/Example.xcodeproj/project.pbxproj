@@ -12,8 +12,9 @@
 		3902D76722D746CA008E634E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3902D76522D746CA008E634E /* Main.storyboard */; };
 		3902D76922D746CC008E634E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3902D76822D746CC008E634E /* Assets.xcassets */; };
 		3902D76C22D746CC008E634E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3902D76A22D746CC008E634E /* LaunchScreen.storyboard */; };
-		3902D77822D75384008E634E /* NKLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D77622D75384008E634E /* NKLocalizable.swift */; };
 		3902D77922D75384008E634E /* NKLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D77722D75384008E634E /* NKLocalizer.swift */; };
+		3902D78222D77684008E634E /* ViewControllerLocalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D78022D77684008E634E /* ViewControllerLocalizer.swift */; };
+		3902D78322D77684008E634E /* ViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3902D78122D77684008E634E /* ViewController.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +25,9 @@
 		3902D76822D746CC008E634E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3902D76B22D746CC008E634E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3902D76D22D746CC008E634E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3902D77622D75384008E634E /* NKLocalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NKLocalizable.swift; sourceTree = "<group>"; };
 		3902D77722D75384008E634E /* NKLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NKLocalizer.swift; sourceTree = "<group>"; };
+		3902D78022D77684008E634E /* ViewControllerLocalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLocalizer.swift; sourceTree = "<group>"; };
+		3902D78122D77684008E634E /* ViewController.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ViewController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				3902D77522D75384008E634E /* NKLocalizerTemplate */,
 				3902D76122D746CA008E634E /* AppDelegate.swift */,
 				3902D76322D746CA008E634E /* ViewController.swift */,
+				3902D77F22D77684008E634E /* ViewControllerLocalizer */,
 				3902D76522D746CA008E634E /* Main.storyboard */,
 				3902D76822D746CC008E634E /* Assets.xcassets */,
 				3902D76A22D746CC008E634E /* LaunchScreen.storyboard */,
@@ -72,11 +75,19 @@
 		3902D77522D75384008E634E /* NKLocalizerTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				3902D77622D75384008E634E /* NKLocalizable.swift */,
 				3902D77722D75384008E634E /* NKLocalizer.swift */,
 			);
 			name = NKLocalizerTemplate;
 			path = ../../NKLocalizerTemplate;
+			sourceTree = "<group>";
+		};
+		3902D77F22D77684008E634E /* ViewControllerLocalizer */ = {
+			isa = PBXGroup;
+			children = (
+				3902D78022D77684008E634E /* ViewControllerLocalizer.swift */,
+				3902D78122D77684008E634E /* ViewController.strings */,
+			);
+			path = ViewControllerLocalizer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3902D76C22D746CC008E634E /* LaunchScreen.storyboard in Resources */,
+				3902D78322D77684008E634E /* ViewController.strings in Resources */,
 				3902D76922D746CC008E634E /* Assets.xcassets in Resources */,
 				3902D76722D746CA008E634E /* Main.storyboard in Resources */,
 			);
@@ -150,10 +162,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3902D78222D77684008E634E /* ViewControllerLocalizer.swift in Sources */,
 				3902D76422D746CA008E634E /* ViewController.swift in Sources */,
 				3902D76222D746CA008E634E /* AppDelegate.swift in Sources */,
 				3902D77922D75384008E634E /* NKLocalizer.swift in Sources */,
-				3902D77822D75384008E634E /* NKLocalizable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
