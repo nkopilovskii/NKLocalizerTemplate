@@ -15,9 +15,9 @@ class ViewControllerLocalizer: NKLocalizer<ViewController> {
   
   //MARK: ViewControllerLocalizer.LocalizedKey
   enum LocalizedKey: String, Equatable {
-    #warning("Fill enum with needed keys")
-    //TODO: Fill enum with needed keys
-    case replaceMe
+    case title
+    case body
+    case btnLanguage
   }
   
   func localizedString(for key: LocalizedKey) -> String {
