@@ -30,14 +30,14 @@
 import Foundation
 
 let kNKLocalizerAppLanguage = "com.NKLocalizer.kLocalizerAppLanguage"
-let kNKLocalizerLanguageNotification = "com.NKLocalizer.kNKLocalizerLanguageNotification"
+let kNKLocalizerLanguageNotification = NSNotification.Name(rawValue: "com.NKLocalizer.kNKLocalizerLanguageNotification")
 
 //MARK: - NKLocalizer base generic class
 class NKLocalizer<Type> {
-
+  
   
   enum LanguageKey: String {
-    case Base
+    case Base 
     //TODO: Add supported languages identifiers
     
     init(_ rawValue: String) {
@@ -50,10 +50,13 @@ class NKLocalizer<Type> {
   private(set) var bundle: Bundle
   
   init(language: LanguageKey? = nil) {
-    self.language = language ?? NKLocalizer.LanguageKey.appLanguage
+    let lang = language ?? NKLocalizer.LanguageKey.appLanguage
+    
+    self.language = lang
     self.tableName = String(describing: Type.self)
     
-    if let path = Bundle.main.path(forResource: (language ?? .Base).rawValue, ofType: "lproj"), let bundle = Bundle(path: path) {
+    if let path = Bundle.main.path(forResource: lang.rawValue, ofType: "lproj"),
+      let bundle = Bundle(path: path) {
       self.bundle = bundle
     } else {
       self.bundle = .main
@@ -64,22 +67,26 @@ class NKLocalizer<Type> {
     return bundle.localizedString(forKey: key, value: key, table: tableName)
   }
   
-  final func changeAppLanguage(_ languageKey: LanguageKey) {
+  static func changeAppLanguage(_ languageKey: LanguageKey) {
     UserDefaults.standard.set(languageKey.rawValue, forKey: kNKLocalizerAppLanguage)
-    NotificationCenter.default.post(name: NSNotification.Name(kNKLocalizerLanguageNotification), object: nil)
+    NotificationCenter.default.post(name: kNKLocalizerLanguageNotification, object: nil)
   }
   
 }
 //MARK: -
 
-
+//MARK: - NKLocalizer.LanguageKey extension
 extension NKLocalizer.LanguageKey {
   
   static var appLanguage: NKLocalizer.LanguageKey {
-    guard let currentLocale = Locale.preferredLanguages.first else {
-      return .Base
+    if let savedLocale = UserDefaults.standard.object(forKey: kNKLocalizerAppLanguage) as? String {
+      return NKLocalizer.LanguageKey(savedLocale)
+    } else if let currentLocale = Locale.preferredLanguages.first  {
+      return NKLocalizer.LanguageKey(currentLocale)
     }
-    return NKLocalizer.LanguageKey(currentLocale)
+    
+    return .Base
   }
   
 }
+//MARK: -
