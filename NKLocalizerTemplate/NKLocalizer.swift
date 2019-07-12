@@ -35,7 +35,6 @@ let kNKLocalizerLanguageNotification = NSNotification.Name(rawValue: "com.NKLoca
 //MARK: - NKLocalizer base generic class
 class NKLocalizer<Type> {
   
-  
   enum LanguageKey: String {
     case Base 
     //TODO: Add supported languages identifiers
